@@ -120,10 +120,19 @@ void SceneManager::SetActiveCascadingScene(const std::string& name)
 
 void SceneManager::DeactivateCascadingScene(const std::string& name)
 {
-	if (activeCascadingScene)
+	if (!CheckSceneExist(name))
 	{
-		// Scene is valid, need to call appropriate function to exit
-		activeCascadingScene->Exit();
+		// Scene does not exist
+		throw std::exception("Scene does not exist");
+	}
+
+	if (activeCascadingScene) // Check if a cascading scene is already active
+	{
+		if (activeCascadingScene == sceneMap[name])  // Check if scene to be deactivated is actually the active cascading scene
+		{
+			// Scene is valid, need to call appropriate function to exit
+			activeCascadingScene->Exit();
+		}
 	}
 	nextScene = activeScene;
 }

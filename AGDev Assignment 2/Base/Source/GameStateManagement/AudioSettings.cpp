@@ -35,7 +35,7 @@ void AudioSettings::Init()
 	//MeshBuilder::GetInstance()->GetMesh("audio_bg")->textureID = LoadTGA("Image//IntroState.tga");
 	float halfWindowWidth = Application::GetInstance().GetWindowWidth() / 2.0f;
 	float halfWindowHeight = Application::GetInstance().GetWindowHeight() / 2.0f;
-	AudioBackground = Create::Sprite2DObject("audio_bg", Vector3(halfWindowWidth, halfWindowHeight + Application::GetInstance().GetWindowHeight() / 15.0f, 1.0f), Vector3(halfWindowWidth * 1.75f, halfWindowHeight * 1.65f, 0.0f));
+	AudioBackground = Create::Sprite2DObject("audio_bg", Vector3(halfWindowWidth, halfWindowHeight + Application::GetInstance().GetWindowHeight() / 15.0f, 3.0f), Vector3(halfWindowWidth * 1.75f, halfWindowHeight * 1.65f, 0.0f));
 
 	cout << "AudioSettings loaded\n" << endl;
 }

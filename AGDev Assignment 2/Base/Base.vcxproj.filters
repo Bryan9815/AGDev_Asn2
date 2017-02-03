@@ -5,10 +5,6 @@
       <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
       <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
     </Filter>
-    <Filter Include="Header Files">
-      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
-      <Extensions>h;hpp;hxx;hm;inl;inc;xsd</Extensions>
-    </Filter>
     <Filter Include="Shader">
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
@@ -31,20 +27,27 @@
     <Filter Include="SpatialPartition">
       <UniqueIdentifier>{802e439a-6b63-421f-9bce-337a839a36c4}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Waypoint">
+      <UniqueIdentifier>{cefb8874-96bd-4356-bec8-84091096971f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Entity">
+      <UniqueIdentifier>{19677539-01a3-4fc2-a507-7bced3b7093d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Lua">
+      <UniqueIdentifier>{ce679d6f-cdf4-4922-bc28-c951603c2237}</UniqueIdentifier>
+    </Filter>
     <Filter Include="LevelOfDetails">
       <UniqueIdentifier>{3f38a962-a883-4f37-9a91-6979b4fc1f88}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hpp;hxx;hm;inl;inc;xsd</Extensions>
     </Filter>
     <Filter Include="Enemy">
       <UniqueIdentifier>{f5fb02ce-b59a-403f-b90f-1e6eba658755}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Waypoint">
-      <UniqueIdentifier>{cefb8874-96bd-4356-bec8-84091096971f}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="GameStateManagement">
+    <Filter Include="Game States">
       <UniqueIdentifier>{b1606fe2-5ef2-4cdd-baea-061dd29daa02}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Lua">
-      <UniqueIdentifier>{ce679d6f-cdf4-4922-bc28-c951603c2237}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -54,22 +57,10 @@
     <ClCompile Include="Source\main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Source\SceneText.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="Source\FPSCamera.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Source\OBJMesh.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\GroundEntity.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\TextEntity.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\SpriteEntity.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Source\Light.cpp">
@@ -95,12 +86,6 @@
     </ClCompile>
     <ClCompile Include="Source\Projectile\Laser.cpp">
       <Filter>Projectile</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\EntityManager.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\GenericEntity.cpp">
-      <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Source\SceneGraph\SceneGraph.cpp">
       <Filter>SceneGraph</Filter>
@@ -139,47 +124,53 @@
       <Filter>Waypoint</Filter>
     </ClCompile>
     <ClCompile Include="Source\GameStateManagement\IntroState.cpp">
-      <Filter>GameStateManagement</Filter>
+      <Filter>Game States</Filter>
     </ClCompile>
     <ClCompile Include="Source\GameStateManagement\MenuState.cpp">
-      <Filter>GameStateManagement</Filter>
+      <Filter>Game States</Filter>
     </ClCompile>
     <ClCompile Include="Source\Lua\LuaInterface.cpp">
       <Filter>Lua</Filter>
     </ClCompile>
     <ClCompile Include="Source\GameStateManagement\Options.cpp">
-      <Filter>GameStateManagement</Filter>
+      <Filter>Game States</Filter>
     </ClCompile>
     <ClCompile Include="Source\GameStateManagement\Score.cpp">
-      <Filter>GameStateManagement</Filter>
+      <Filter>Game States</Filter>
     </ClCompile>
     <ClCompile Include="Source\GameStateManagement\AudioSettings.cpp">
-      <Filter>GameStateManagement</Filter>
+      <Filter>Game States</Filter>
     </ClCompile>
     <ClCompile Include="Source\GameStateManagement\InputSettings.cpp">
-      <Filter>GameStateManagement</Filter>
+      <Filter>Game States</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\SceneText.cpp">
+      <Filter>Game States</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\GroundEntity.cpp">
+      <Filter>Entity</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\GenericEntity.cpp">
+      <Filter>Entity</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\SpriteEntity.cpp">
+      <Filter>Entity</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\TextEntity.cpp">
+      <Filter>Entity</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\EntityManager.cpp">
+      <Filter>Entity</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\Application.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Source\SceneText.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="Source\FPSCamera.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Source\OBJMesh.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\GroundEntity.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\TextEntity.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\SpriteEntity.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Source\Light.h">
@@ -205,12 +196,6 @@
     </ClInclude>
     <ClInclude Include="Source\Projectile\Laser.h">
       <Filter>Projectile</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\EntityManager.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\GenericEntity.h">
-      <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Source\SceneGraph\SceneGraph.h">
       <Filter>SceneGraph</Filter>
@@ -249,10 +234,10 @@
       <Filter>Waypoint</Filter>
     </ClInclude>
     <ClInclude Include="Source\GameStateManagement\IntroState.h">
-      <Filter>GameStateManagement</Filter>
+      <Filter>Game States</Filter>
     </ClInclude>
     <ClInclude Include="Source\GameStateManagement\MenuState.h">
-      <Filter>GameStateManagement</Filter>
+      <Filter>Game States</Filter>
     </ClInclude>
     <ClInclude Include="Source\Lua\lauxlib.h">
       <Filter>Lua</Filter>
@@ -273,16 +258,34 @@
       <Filter>Lua</Filter>
     </ClInclude>
     <ClInclude Include="Source\GameStateManagement\Options.h">
-      <Filter>GameStateManagement</Filter>
+      <Filter>Game States</Filter>
     </ClInclude>
     <ClInclude Include="Source\GameStateManagement\Score.h">
-      <Filter>GameStateManagement</Filter>
+      <Filter>Game States</Filter>
     </ClInclude>
     <ClInclude Include="Source\GameStateManagement\AudioSettings.h">
-      <Filter>GameStateManagement</Filter>
+      <Filter>Game States</Filter>
     </ClInclude>
     <ClInclude Include="Source\GameStateManagement\InputSettings.h">
-      <Filter>GameStateManagement</Filter>
+      <Filter>Game States</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\SceneText.h">
+      <Filter>Game States</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\TextEntity.h">
+      <Filter>Entity</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\SpriteEntity.h">
+      <Filter>Entity</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\GroundEntity.h">
+      <Filter>Entity</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\GenericEntity.h">
+      <Filter>Entity</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\EntityManager.h">
+      <Filter>Entity</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

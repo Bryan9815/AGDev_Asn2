@@ -39,8 +39,6 @@ void Options::Init()
 	halfWindowWidth = Application::GetInstance().GetWindowWidth() / 2.0f;
 	halfWindowHeight = Application::GetInstance().GetWindowHeight() / 2.0f;
 	Options_BG = Create::Sprite2DObject("options_bg", Vector3(halfWindowWidth, halfWindowHeight, 0.0f), Vector3(Application::GetInstance().GetWindowWidth(), Application::GetInstance().GetWindowHeight(), 0.0f));
-
-	//SceneManager::GetInstance()->SetActiveCascadingScene("AudioSettings");
 	
 	for (int i = 0; i < 3; i++)
 	{
@@ -53,25 +51,35 @@ void Options::Init()
 	textObj[2]->SetText("Exit");
 
 	MenuOption = 0;
+
+	Select = Create::Sprite2DObject("Select", Vector3(0.f, 0.f, 1.f), Vector3(100.f, 100.f, 1.f));
+
+	cout << "Options loaded\n" << endl;
 }
 void Options::Update(double dt)
 {
-	if (KeyboardController::GetInstance()->IsKeyReleased(VK_SPACE))
-	{
-		cout << "Loading MenuState" << endl;
-		SceneManager::GetInstance()->SetActiveScene("MenuState");
-	}
 	if (KeyboardController::GetInstance()->IsKeyReleased('W'))
 		if(MenuOption > 0)
 			MenuOption--;
 	if (KeyboardController::GetInstance()->IsKeyReleased('S'))
 		if (MenuOption < 2)
 			MenuOption++;
+
+	if (KeyboardController::GetInstance()->IsKeyReleased(VK_SPACE))
+	{
+		if (MenuOption == 0)
+			SceneManager::GetInstance()->SetActiveCascadingScene("AudioSettings");
+		else if (MenuOption == 1)
+			SceneManager::GetInstance()->SetActiveCascadingScene("InputSettings");
+		else if (MenuOption == 2)
+			SceneManager::GetInstance()->SetActiveScene("MenuState");
+	}
+
+	Select->SetPosition(Vector3(halfWindowWidth - (halfWindowWidth * 0.6f), halfWindowHeight * 1.5f - (halfWindowHeight * 0.5 * MenuOption), 1.f));
 }
 void Options::Render()
 {
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-	MS& modelStack = GraphicsManager::GetInstance()->GetModelStack();
 	//GraphicsManager::GetInstance()->UpdateLightUniforms();
 
 	// Setup 3D pipeline then render 3D
@@ -87,21 +95,17 @@ void Options::Render()
 
 	// Render the required entities
 	EntityManager::GetInstance()->RenderUI();
-
-	for (int i = 0; i < 3; i++)
-	{
-		modelStack.PushMatrix();
-		modelStack.Translate(halfWindowWidth - (halfWindowWidth * 0.6f), halfWindowHeight * 1.5f - (halfWindowHeight * 0.5 * i), 1.0f);
-		modelStack.Scale(100.f, 100.f, 1.f);
-		if (i == MenuOption)
-			RenderHelper::RenderMesh(MeshBuilder::GetInstance()->GetMesh("Select"));
-		modelStack.PopMatrix();
-	}
 }
 void Options::Exit()
 {
 	// Remove the entity from EntityManager
 	EntityManager::GetInstance()->RemoveEntity(Options_BG);
+	EntityManager::GetInstance()->RemoveEntity(Select);
+	for (int i = 0; i < 3; i++)
+	{
+		EntityManager::GetInstance()->RemoveEntity(Buttons[i]);
+		EntityManager::GetInstance()->RemoveEntity(textObj[i]);
+	}
 
 	// Remove the meshes which are specific to Options
 	MeshBuilder::GetInstance()->RemoveMesh("options_bg");
