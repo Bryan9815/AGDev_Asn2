@@ -12,22 +12,24 @@ class SceneManager : public Singleton<SceneManager>
 	friend Singleton<SceneManager>;
 public:
 	// System Interface
-	void Update(double _dt);
+	void Update(double dt);
 	void Render();
 	void Exit();
 
 	// User Interface
-	void AddScene(const std::string& _name, Scene* _scene);
-	void RemoveScene(const std::string& _name);
-	void SetActiveScene(const std::string& _name);
-	bool CheckSceneExist(const std::string& _name);
+	void AddScene(const std::string& name, Scene* scene);
+	void RemoveScene(const std::string& name);
+	void SetActiveScene(const std::string& name);
+	void SetActiveCascadingScene(const std::string& name);
+	void DeactivateCascadingScene(const std::string& name);
+	bool CheckSceneExist(const std::string& name);
 
 private:
 	SceneManager();
 	~SceneManager();
 
 	std::map<std::string, Scene*> sceneMap;
-	Scene* activeScene, *nextScene;
+	Scene* activeScene, *activeCascadingScene, *nextScene;
 };
 
 #endif // SCENE_MANAGER_H

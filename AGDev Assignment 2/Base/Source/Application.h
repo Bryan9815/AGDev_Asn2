@@ -6,6 +6,7 @@
 #include "GameStateManagement\IntroState.h"
 #include "GameStateManagement\MenuState.h"
 #include "GameStateManagement\Options.h"
+#include "GameStateManagement\AudioSettings.h"
 #include "GameStateManagement\Score.h"
 
 class ShaderProgram;

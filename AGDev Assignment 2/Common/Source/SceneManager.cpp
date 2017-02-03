@@ -1,7 +1,10 @@
 #include "SceneManager.h"
 #include "Scene.h"
+#include <iostream>
+using std::cout;
+using std::endl;
 
-SceneManager::SceneManager() : activeScene(nullptr), nextScene(nullptr)
+SceneManager::SceneManager() : activeScene(nullptr), activeCascadingScene(nullptr), nextScene(nullptr)
 {
 }
 
@@ -9,29 +12,33 @@ SceneManager::~SceneManager()
 {
 }
 
-void SceneManager::Update(double _dt)
+void SceneManager::Update(double dt)
 {
 	// Check for change of scene
-	if (nextScene != activeScene)
+	if (nextScene != activeScene && nextScene != activeCascadingScene)
 	{
 		if (activeScene)
 		{
 			// Scene is valid, need to call appropriate function to exit
 			activeScene->Exit();
 		}
-		
+
 		activeScene = nextScene;
 		activeScene->Init();
 	}
 
-	if (activeScene)
-		activeScene->Update(_dt);
+	if (activeCascadingScene == nextScene)
+		activeCascadingScene->Update(dt);
+	else if (activeScene == nextScene)
+		activeScene->Update(dt);
 }
 
 void SceneManager::Render()
 {
 	if (activeScene)
 		activeScene->Render();
+	if (activeCascadingScene)
+		activeCascadingScene->Render();
 }
 
 void SceneManager::Exit()
@@ -48,30 +55,30 @@ void SceneManager::Exit()
 	sceneMap.clear();
 }
 
-void SceneManager::AddScene(const std::string& _name, Scene* _scene)
+void SceneManager::AddScene(const std::string& name, Scene* scene)
 {
-	if (CheckSceneExist(_name))
+	if (CheckSceneExist(name))
 	{
 		// Scene Exist, unable to proceed
 		throw std::exception("Duplicate scene name provided");
 	}
 
-	if (_scene == nullptr)
+	if (scene == nullptr)
 	{
 		throw std::invalid_argument("Invalid scene pointer");
 	}
 
 	// Nothing wrong, add the scene to our map
-	sceneMap[_name] = _scene;
+	sceneMap[name] = scene;
 }
 
-void SceneManager::RemoveScene(const std::string& _name)
+void SceneManager::RemoveScene(const std::string& name)
 {
 	// Does nothing if it does not exist
-	if (!CheckSceneExist(_name))
+	if (!CheckSceneExist(name))
 		return;
 
-	Scene* target = sceneMap[_name];
+	Scene* target = sceneMap[name];
 	if (target == activeScene || target == nextScene)
 	{
 		throw std::exception("Unable to remove active/next scene");
@@ -79,22 +86,48 @@ void SceneManager::RemoveScene(const std::string& _name)
 
 	// Delete and remove from our map
 	delete target;
-	sceneMap.erase(_name);
+	sceneMap.erase(name);
 }
 
-void SceneManager::SetActiveScene(const std::string& _name)
+void SceneManager::SetActiveScene(const std::string& name)
 {
-	if (!CheckSceneExist(_name))
+	if (!CheckSceneExist(name))
 	{
 		// Scene does not exist
 		throw std::exception("Scene does not exist");
 	}
 
 	// Scene exist, set the next scene pointer to that scene
-	nextScene = sceneMap[_name];
+	nextScene = sceneMap[name];
 }
 
-bool SceneManager::CheckSceneExist(const std::string& _name)
+void SceneManager::SetActiveCascadingScene(const std::string& name)
 {
-	return sceneMap.count(_name) != 0;
+	if (!CheckSceneExist(name))
+	{
+		// Scene does not exist
+		throw std::exception("Scene does not exist");
+	}
+
+	// Scene exist, set the next scene pointer to that scene
+	activeCascadingScene = sceneMap[name];
+	nextScene = activeCascadingScene;
+
+	activeCascadingScene->Init();
+}
+
+void SceneManager::DeactivateCascadingScene(const std::string& name)
+{
+	if (activeCascadingScene)
+	{
+		// Scene is valid, need to call appropriate function to exit
+		activeCascadingScene->Exit();
+	}
+	nextScene = activeScene;
+	cout << "Active Scene: " << activeScene << ", nextScene: " << nextScene << endl;
+}
+
+bool SceneManager::CheckSceneExist(const std::string& name)
+{
+	return sceneMap.count(name) != 0;
 }

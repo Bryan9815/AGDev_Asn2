@@ -188,7 +188,7 @@ void Application::Init()
 	}
 
 	// Cursor
-	glfwSetInputMode(m_window, GLFW_CURSOR, GLFW_CURSOR_NORMAL);
+	glfwSetInputMode(m_window, GLFW_CURSOR, GLFW_CURSOR_HIDDEN);
 	glfwSetMouseButtonCallback(m_window, &Application::MouseButtonCallbacks);
 	glfwSetScrollCallback(m_window, &Application::MouseScrollCallbacks);
 
@@ -199,6 +199,7 @@ void Application::Init()
 	SceneManager::GetInstance()->AddScene("IntroState", new CIntroState());
 	SceneManager::GetInstance()->AddScene("MenuState", new CMenuState());
 	SceneManager::GetInstance()->AddScene("Options", new Options());
+	SceneManager::GetInstance()->AddScene("AudioSettings", new AudioSettings());
 	SceneManager::GetInstance()->AddScene("Score", new Score());
 	SceneManager::GetInstance()->AddScene("GameState", new SceneText());
 
