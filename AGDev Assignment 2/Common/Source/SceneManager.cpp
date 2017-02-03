@@ -14,19 +14,6 @@ SceneManager::~SceneManager()
 
 void SceneManager::Update(double dt)
 {
-	// Check for change of scene
-	if (nextScene != activeScene && nextScene != activeCascadingScene)
-	{
-		if (activeScene)
-		{
-			// Scene is valid, need to call appropriate function to exit
-			activeScene->Exit();
-		}
-
-		activeScene = nextScene;
-		activeScene->Init();
-	}
-
 	if (activeCascadingScene == nextScene)
 		activeCascadingScene->Update(dt);
 	else if (activeScene == nextScene)
@@ -99,6 +86,15 @@ void SceneManager::SetActiveScene(const std::string& name)
 
 	// Scene exist, set the next scene pointer to that scene
 	nextScene = sceneMap[name];
+
+	if (activeScene) // Check if a scene is already active
+	{
+		// Scene is valid, need to call appropriate function to exit
+		activeScene->Exit();
+	}
+
+	activeScene = nextScene;
+	activeScene->Init();
 }
 
 void SceneManager::SetActiveCascadingScene(const std::string& name)
@@ -110,9 +106,15 @@ void SceneManager::SetActiveCascadingScene(const std::string& name)
 	}
 
 	// Scene exist, set the next scene pointer to that scene
-	activeCascadingScene = sceneMap[name];
-	nextScene = activeCascadingScene;
+	nextScene = sceneMap[name];
 
+	if (activeCascadingScene) // Check if a cascading scene is already active
+	{
+		// Scene is valid, need to call appropriate function to exit
+		activeCascadingScene->Exit();
+	}
+
+	activeCascadingScene = nextScene;
 	activeCascadingScene->Init();
 }
 
@@ -124,7 +126,6 @@ void SceneManager::DeactivateCascadingScene(const std::string& name)
 		activeCascadingScene->Exit();
 	}
 	nextScene = activeScene;
-	cout << "Active Scene: " << activeScene << ", nextScene: " << nextScene << endl;
 }
 
 bool SceneManager::CheckSceneExist(const std::string& name)

@@ -156,6 +156,9 @@
     <ClCompile Include="Source\GameStateManagement\AudioSettings.cpp">
       <Filter>GameStateManagement</Filter>
     </ClCompile>
+    <ClCompile Include="Source\GameStateManagement\InputSettings.cpp">
+      <Filter>GameStateManagement</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\Application.h">
@@ -276,6 +279,9 @@
       <Filter>GameStateManagement</Filter>
     </ClInclude>
     <ClInclude Include="Source\GameStateManagement\AudioSettings.h">
+      <Filter>GameStateManagement</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\GameStateManagement\InputSettings.h">
       <Filter>GameStateManagement</Filter>
     </ClInclude>
   </ItemGroup>

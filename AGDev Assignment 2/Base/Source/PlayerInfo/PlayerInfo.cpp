@@ -83,11 +83,7 @@ void CPlayerInfo::Init(void)
 	keyMoveLeft = CLuaInterface::GetInstance()->getCharValue("moveLeft");
 	keyMoveRight = CLuaInterface::GetInstance()->getCharValue("moveRight");
 
-
 	float distanceSquare = CLuaInterface::GetInstance()->getDistanceSquareValue("CalculateDistanceSquare", Vector3(0, 0, 0), Vector3(10, 10, 10));
-
-	//int a = 1, b = 2, c = 3, d = 4;
-	//CLuaInterface::GetInstance()->getVariableValues("GetMinMax", a, b, c, d);
 }
 
 // Returns true if the player is on ground

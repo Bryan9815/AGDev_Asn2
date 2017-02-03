@@ -200,6 +200,7 @@ void Application::Init()
 	SceneManager::GetInstance()->AddScene("MenuState", new CMenuState());
 	SceneManager::GetInstance()->AddScene("Options", new Options());
 	SceneManager::GetInstance()->AddScene("AudioSettings", new AudioSettings());
+	SceneManager::GetInstance()->AddScene("InputSettings", new InputSettings());
 	SceneManager::GetInstance()->AddScene("Score", new Score());
 	SceneManager::GetInstance()->AddScene("GameState", new SceneText());
 

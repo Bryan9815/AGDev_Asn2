@@ -1,11 +1,9 @@
 #pragma once
 
 #include "Scene.h"
-#include "Mtx44.h"
-#include "Mesh.h"
-#include "MatrixStack.h"
 #include "../FPSCamera.h"
 #include "../SpriteEntity.h"
+#include "../TextEntity.h"
 
 class SceneManager;
 //class TextEntity;
@@ -22,6 +20,11 @@ public:
 
 private:
 	FPSCamera camera;
-	SpriteEntity* IntroStateBackground;
-	//	TextEntity* textObj[3];
+	SpriteEntity* Options_BG, *Buttons[3], *Select;
+
+	float halfWindowWidth;
+	float halfWindowHeight;
+	unsigned int MenuOption;
+
+	TextEntity *textObj[3];
 };

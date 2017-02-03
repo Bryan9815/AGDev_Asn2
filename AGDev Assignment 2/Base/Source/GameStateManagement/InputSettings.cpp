@@ -1,7 +1,7 @@
 #include <iostream>
 using namespace std;
 
-#include "AudioSettings.h"
+#include "InputSettings.h"
 #include "GL\glew.h"
 #include "../Application.h"
 #include "LoadTGA.h"
@@ -15,40 +15,40 @@ using namespace std;
 #include "KeyboardController.h"
 #include "SceneManager.h"
 
-AudioSettings::AudioSettings()
+InputSettings::InputSettings()
 {
 
 }
-AudioSettings::~AudioSettings()
+InputSettings::~InputSettings()
 {
 
 }
 
-void AudioSettings::Init()
+void InputSettings::Init()
 {
 	// Create and attach the camera to the scene
 	camera.Init(Vector3(0, 0, 10), Vector3(0, 0, 0), Vector3(0, 1, 0));
 	GraphicsManager::GetInstance()->AttachCamera(&camera);
 
 	// Load all the meshes
-	MeshBuilder::GetInstance()->GenerateQuad("audio_bg", Color(1, 1, 1), 1.f);
-	//MeshBuilder::GetInstance()->GetMesh("audio_bg")->textureID = LoadTGA("Image//IntroState.tga");
+	MeshBuilder::GetInstance()->GenerateQuad("Input_bg", Color(0, 0, 0), 1.f);
+	//MeshBuilder::GetInstance()->GetMesh("Input_bg")->textureID = LoadTGA("Image//IntroState.tga");
 	float halfWindowWidth = Application::GetInstance().GetWindowWidth() / 2.0f;
 	float halfWindowHeight = Application::GetInstance().GetWindowHeight() / 2.0f;
-	AudioBackground = Create::Sprite2DObject("audio_bg", Vector3(halfWindowWidth, halfWindowHeight + Application::GetInstance().GetWindowHeight() / 15.0f, 1.0f), Vector3(halfWindowWidth * 1.75f, halfWindowHeight * 1.65f, 0.0f));
+	InputBackground = Create::Sprite2DObject("Input_bg", Vector3(halfWindowWidth, halfWindowHeight + Application::GetInstance().GetWindowHeight() / 15.0f, 1.0f), Vector3(halfWindowWidth * 1.75f, halfWindowHeight * 1.65f, 0.0f));
 
-	cout << "AudioSettings loaded\n" << endl;
+	cout << "InputSettings loaded\n" << endl;
 }
 
-void AudioSettings::Update(double dt)
+void InputSettings::Update(double dt)
 {
 	if (KeyboardController::GetInstance()->IsKeyReleased(VK_SPACE))
-		SceneManager::GetInstance()->DeactivateCascadingScene("AudioSettings");
-	if (KeyboardController::GetInstance()->IsKeyReleased('E'))
-		SceneManager::GetInstance()->SetActiveCascadingScene("InputSettings");
+		SceneManager::GetInstance()->DeactivateCascadingScene("InputSettings");
+	if (KeyboardController::GetInstance()->IsKeyReleased('Q'))
+		SceneManager::GetInstance()->SetActiveCascadingScene("AudioSettings");
 }
 
-void AudioSettings::Render()
+void InputSettings::Render()
 {
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
@@ -68,13 +68,13 @@ void AudioSettings::Render()
 	// Render the required entities
 	EntityManager::GetInstance()->RenderUI();
 }
-void AudioSettings::Exit()
+void InputSettings::Exit()
 {
 	// Remove the entity from EntityManager
-	EntityManager::GetInstance()->RemoveEntity(AudioBackground);
+	EntityManager::GetInstance()->RemoveEntity(InputBackground);
 
-	// Remove the meshes which are specific to AudioSettings
-	MeshBuilder::GetInstance()->RemoveMesh("audio_bg");
+	// Remove the meshes which are specific to InputSettings
+	MeshBuilder::GetInstance()->RemoveMesh("Input_bg");
 
 	// Detach camera from other entities
 	GraphicsManager::GetInstance()->DetachCamera();

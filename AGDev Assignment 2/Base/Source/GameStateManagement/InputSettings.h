@@ -8,11 +8,12 @@
 #include "../SpriteEntity.h"
 
 class SceneManager;
-class CMenuState : public Scene
+//class TextEntity;
+class InputSettings : public Scene
 {
 public:
-	CMenuState();
-	~CMenuState();
+	InputSettings();
+	~InputSettings();
 
 	virtual void Init();
 	virtual void Update(double dt);
@@ -21,11 +22,6 @@ public:
 
 private:
 	FPSCamera camera;
-	SpriteEntity* MenuStateBackground;
-
-	float halfWindowWidth;
-	float halfWindowHeight;
-	unsigned int MenuOption;
-	char StartGame, Options, Score;
-	TextEntity* textObj[3];
+	SpriteEntity* InputBackground;
+	//	TextEntity* textObj[3];
 };

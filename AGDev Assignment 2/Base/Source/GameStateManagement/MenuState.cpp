@@ -31,12 +31,22 @@ void CMenuState::Init()
 	camera.Init(Vector3(0, 0, 10), Vector3(0, 0, 0), Vector3(0, 1, 0));
 	GraphicsManager::GetInstance()->AttachCamera(&camera);
 
+	halfWindowWidth = Application::GetInstance().GetWindowWidth() / 2.0f;
+	halfWindowHeight = Application::GetInstance().GetWindowHeight() / 2.0f;
+
 	// Load all the meshes
 	MeshBuilder::GetInstance()->GenerateQuad("MENUSTATE_BKGROUND", Color(1, 1, 1), 1.f);
-	MeshBuilder::GetInstance()->GetMesh("MENUSTATE_BKGROUND")->textureID = LoadTGA("Image//MenuState.tga");
-	float halfWindowWidth = Application::GetInstance().GetWindowWidth() / 2.0f;
-	float halfWindowHeight = Application::GetInstance().GetWindowHeight() / 2.0f;
+	MeshBuilder::GetInstance()->GetMesh("MENUSTATE_BKGROUND")->textureID = LoadTGA("Image//MenuState.tga");	
 	MenuStateBackground = Create::Sprite2DObject("MENUSTATE_BKGROUND", Vector3(halfWindowWidth, halfWindowHeight, 0.0f), Vector3(Application::GetInstance().GetWindowWidth(), Application::GetInstance().GetWindowHeight(), 0.0f));
+
+	MeshBuilder::GetInstance()->GenerateText("Text", 16, 16);
+	MeshBuilder::GetInstance()->GetMesh("Text")->textureID = LoadTGA("Image//calibri.tga");
+
+	MeshBuilder::GetInstance()->GenerateQuad("Button", Color(1, 1, 1), 1.f);
+	MeshBuilder::GetInstance()->GetMesh("Button")->textureID = LoadTGA("Image/UI/RoundedButton.tga");
+
+	MeshBuilder::GetInstance()->GenerateQuad("Select", Color(1, 1, 1), 1.f);
+	MeshBuilder::GetInstance()->GetMesh("Select")->textureID = LoadTGA("Image/UI/Select.tga");
 
 	cout << "CMenuState loaded\n" << endl;
 
