@@ -20,11 +20,9 @@ public:
 
 private:
 	FPSCamera camera;
-	SpriteEntity* Options_BG, *Buttons[3], *Select;
+	SpriteEntity* Options_BG;
 
 	float halfWindowWidth;
 	float halfWindowHeight;
 	unsigned int MenuOption;
-
-	TextEntity *textObj[3];
 };

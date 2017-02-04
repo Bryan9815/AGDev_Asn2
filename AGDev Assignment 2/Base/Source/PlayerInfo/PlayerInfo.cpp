@@ -15,8 +15,7 @@
 CPlayerInfo *CPlayerInfo::s_instance = 0;
 
 CPlayerInfo::CPlayerInfo(void)
-	: m_dSpeed(40.0)
-	, m_dAcceleration(10.0)
+	: m_dAcceleration(10.0)
 	, m_bJumpUpwards(false)
 	, m_dJumpSpeed(10.0)
 	, m_dJumpAcceleration(-10.0)
@@ -58,11 +57,13 @@ void CPlayerInfo::Init(void)
 	defaultUp.Set(0,1,0);
 
 	// Set the current values
-	CLuaInterface::GetInstance()->Init("LuaScript/Player.lua");
+	CLuaInterface::GetInstance()->Init("LuaScript/Gameplay.lua");
 	position = CLuaInterface::GetInstance()->getVector3Values("CPlayerInfoStartPos");
 //	position.Set(0, 0, 10);
 	target.Set(0, 0, 0);
 	up.Set(0, 1, 0);
+
+	m_dSpeed = 8.0 * (CLuaInterface::GetInstance()->getIntValue("MouseSensitivity"));
 
 	// Set Boundary
 	maxBoundary.Set(1,1,1);
@@ -84,6 +85,8 @@ void CPlayerInfo::Init(void)
 	keyMoveRight = CLuaInterface::GetInstance()->getCharValue("moveRight");
 
 	float distanceSquare = CLuaInterface::GetInstance()->getDistanceSquareValue("CalculateDistanceSquare", Vector3(0, 0, 0), Vector3(10, 10, 10));
+	int a = 1, b = 2, c = 3, d = 4;
+	CLuaInterface::GetInstance()->getVariableValues("GetMinMax", a, b, c, d);
 }
 
 // Returns true if the player is on ground

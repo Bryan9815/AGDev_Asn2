@@ -139,8 +139,8 @@ void Application::Init()
 
 	CLuaInterface::GetInstance()->Run();
 	CLuaInterface::GetInstance()->saveFloatValue("LuaScript/Score.lua", "Player1", 250.15f, true);
-	CLuaInterface::GetInstance()->saveIntValue("LuaScript/Score.lua", "Player2", 200);
-	CLuaInterface::GetInstance()->saveIntValue("LuaScript/Score.lua", "Player3", 400);
+	CLuaInterface::GetInstance()->saveIntValue("LuaScript/Score.lua", "Player2", m_window_width);
+	CLuaInterface::GetInstance()->saveIntValue("LuaScript/Score.lua", "Player3", m_window_height);
 
 	//Set the error callback
 	glfwSetErrorCallback(error_callback);
@@ -158,8 +158,29 @@ void Application::Init()
 	//glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE); // To make MacOS happy; should not be needed
 	glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE); //We don't want the old OpenGL 
 
-	//Create a window and create its OpenGL context
-	m_window = glfwCreateWindow(m_window_width, m_window_height, "NYP Framework", NULL, NULL);
+	int windowMode = CLuaInterface::GetInstance()->getIntValue("windowMode");
+	if (windowMode == 0)
+	{
+		//Borderless
+		glfwWindowHint(GLFW_DECORATED, GL_FALSE);
+
+		// SIDE NOTE: DO NOT BUG TEST IN FULL SCREEN. IF IT LAGS OUT, YOU CANNOT CLOSE THE WINDOW!
+		const GLFWvidmode * mode = glfwGetVideoMode(glfwGetPrimaryMonitor());
+		//Obtain Width and Height values from the monitor;
+
+		glfwWindowHint(GLFW_RED_BITS, mode->redBits);
+		glfwWindowHint(GLFW_GREEN_BITS, mode->greenBits);
+		glfwWindowHint(GLFW_BLUE_BITS, mode->blueBits);
+		glfwWindowHint(GLFW_REFRESH_RATE, mode->refreshRate);
+
+		//Create a window and create its OpenGL context
+		m_window = glfwCreateWindow(mode->width, mode->height, "NYP Framework", NULL, NULL);
+	}
+	else if (windowMode == 1)
+	{
+		//Create a window and create its OpenGL context
+		m_window = glfwCreateWindow(m_window_width, m_window_height, "NYP Framework", NULL, NULL);
+	}
 
 	//If the window couldn't be created
 	if (!m_window)
@@ -200,7 +221,7 @@ void Application::Init()
 	SceneManager::GetInstance()->AddScene("MenuState", new CMenuState());
 	SceneManager::GetInstance()->AddScene("Options", new Options());
 	SceneManager::GetInstance()->AddScene("AudioSettings", new AudioSettings());
-	SceneManager::GetInstance()->AddScene("InputSettings", new InputSettings());
+	SceneManager::GetInstance()->AddScene("GameplaySettings", new GameplaySettings());
 	SceneManager::GetInstance()->AddScene("Score", new Score());
 	SceneManager::GetInstance()->AddScene("GameState", new SceneText());
 

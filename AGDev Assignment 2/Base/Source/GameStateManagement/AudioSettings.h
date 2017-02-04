@@ -23,5 +23,14 @@ public:
 private:
 	FPSCamera camera;
 	SpriteEntity* AudioBackground;
+
+	bool sceneActive;
+	float halfWindowWidth;
+	float halfWindowHeight;
+
+	int SFX, Music;
+	string SFX_text, Music_text;
+
+	unsigned int MenuOption;
 	//	TextEntity* textObj[3];
 };

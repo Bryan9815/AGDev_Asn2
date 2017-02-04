@@ -23,7 +23,6 @@ public:
 	void SetActiveCascadingScene(const std::string& name);
 	void DeactivateCascadingScene(const std::string& name);
 	bool CheckSceneExist(const std::string& name);
-
 private:
 	SceneManager();
 	~SceneManager();

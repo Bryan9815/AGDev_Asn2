@@ -1,7 +1,3 @@
-title = "DM2240 - Assignment 2"
-width = 1600
-height = 900
-
 -- Functions
 function SaveToLuaFile(filePath, outputString, overwrite)
    print("SaveToLuaFile...")
@@ -43,3 +39,40 @@ function GetMinMax(...)
 	print(minValue, maxValue, avgValue, numValues)
 	return minValue, maxValue, avgValue, numValues
 end
+
+-- Variables
+title = "DM2240 - Assignment 2"
+width = 1600
+height = 900
+
+windowMode = 1;
+-- 0 = Fullscreen, 1 = Windowed
+Resolution = 3;
+-- 0 = 800x600, 1 = 1024x720, 2 = 1440x810, 3 = 1600x900, 4 = 1600x1024, 5 = 1920x1080
+MouseSensitivity = 5
+
+-- Changed Variables (Remove everthing below this to reset to default values, make sure to leave an empty line)
+windowMode = 1
+Resolution = 3
+width = 1600
+height = 900
+windowMode = 1
+Resolution = 3
+MouseSensitivity = 1
+width = 1600
+height = 900
+windowMode = 1
+Resolution = 3
+MouseSensitivity = 10
+width = 1600
+height = 900
+windowMode = 1
+Resolution = 3
+MouseSensitivity = 7
+width = 1600
+height = 900
+windowMode = 1
+Resolution = 3
+MouseSensitivity = 7
+width = 1600
+height = 900

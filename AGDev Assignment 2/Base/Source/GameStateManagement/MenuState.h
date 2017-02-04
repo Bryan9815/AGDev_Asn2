@@ -26,6 +26,4 @@ private:
 	float halfWindowWidth;
 	float halfWindowHeight;
 	unsigned int MenuOption;
-	char StartGame, Options, Score;
-	TextEntity* textObj[3];
 };
