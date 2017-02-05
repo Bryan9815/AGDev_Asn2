@@ -46,16 +46,31 @@ function GetMinMax(...)
 	return minValue, maxValue, avgValue, numValues
 end
 
--- Game Settings
+-- CPlayerInfo variables
+CPlayerInfoStartPos = {0,0,10}
 MouseSensitivity = 5;
--- Keyboard Inputs
+playerSpeed = 40;
+
+-- Scene variables
+GroundPos = {0, -10, 0}
+GroundScale = {100, 100, 100}
+Skybox_front = "skybox_front.tga"
+Skybox_back = "skybox_back.tga"
+Skybox_left = "skybox_left.tga"
+Skybox_right = "skybox_right.tga"
+Skybox_top = "skybox_top.tga"
+Skybox_bottom = "skybox_bottom.tga"
+NumberOfWaypoints = 4;
+Waypoint1 = {50, 0, -50}
+Waypoint2 = {10, 0, 50}
+Waypoint3 = {50, 0, 50}
+Waypoint4 = {10, 0, -50}
+ 
+ -- Keyboard Inputs
 moveForward  = "W"
 moveBackward = "S"
 moveLeft     = "A"
 moveRight    = "D"
-
--- CPlayerInfo start position
-CPlayerInfoStartPos = {0,0,10}
 
 -- Sound Settings
 SFX = 100
@@ -116,4 +131,34 @@ MouseSensitivity = 7
 MouseSensitivity = 1
 MouseSensitivity = 10
 MouseSensitivity = 7
+MouseSensitivity = 7
+SFX = 87
+Music = 55
+MouseSensitivity = 7
+MouseSensitivity = 7
+MouseSensitivity = 7
+MouseSensitivity = 7
+MouseSensitivity = 7
+MouseSensitivity = 7
+SFX = 87
+Music = 74
+MouseSensitivity = 7
+SFX = 56
+Music = 74
+MouseSensitivity = 7
+SFX = 56
+Music = 74
+MouseSensitivity = 7
+SFX = 89
+Music = 70
+MouseSensitivity = 7
+SFX = 89
+Music = 70
+MouseSensitivity = 7
+MouseSensitivity = 7
+MouseSensitivity = 7
+MouseSensitivity = 7
+MouseSensitivity = 7
+MouseSensitivity = 7
+MouseSensitivity = 1
 MouseSensitivity = 7

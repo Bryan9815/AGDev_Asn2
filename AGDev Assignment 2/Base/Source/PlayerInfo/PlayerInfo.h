@@ -103,7 +103,7 @@ private:
 	GroundEntity* m_pTerrain;
 
 	double m_dSpeed;
-	double m_dAcceleration;
+	double m_dMouseSensitivity;
 
 	bool m_bJumpUpwards;
 	double m_dJumpSpeed;

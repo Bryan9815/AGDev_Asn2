@@ -15,8 +15,7 @@
 CPlayerInfo *CPlayerInfo::s_instance = 0;
 
 CPlayerInfo::CPlayerInfo(void)
-	: m_dAcceleration(10.0)
-	, m_bJumpUpwards(false)
+	: m_bJumpUpwards(false)
 	, m_dJumpSpeed(10.0)
 	, m_dJumpAcceleration(-10.0)
 	, m_bFallDownwards(false)
@@ -63,7 +62,8 @@ void CPlayerInfo::Init(void)
 	target.Set(0, 0, 0);
 	up.Set(0, 1, 0);
 
-	m_dSpeed = 8.0 * (CLuaInterface::GetInstance()->getIntValue("MouseSensitivity"));
+	m_dSpeed = CLuaInterface::GetInstance()->getIntValue("playerSpeed");
+	m_dMouseSensitivity = 8.0 * (CLuaInterface::GetInstance()->getIntValue("MouseSensitivity"));
 
 	// Set Boundary
 	maxBoundary.Set(1,1,1);
@@ -333,70 +333,13 @@ void CPlayerInfo::Update(double dt)
 	}
 
 	// Rotate the view direction
-	if (KeyboardController::GetInstance()->IsKeyDown(VK_LEFT) ||
-		KeyboardController::GetInstance()->IsKeyDown(VK_RIGHT) ||
-		KeyboardController::GetInstance()->IsKeyDown(VK_UP) ||
-		KeyboardController::GetInstance()->IsKeyDown(VK_DOWN))
-	{
-		Vector3 viewUV = (target - position).Normalized();
-		Vector3 rightUV;
-		if (KeyboardController::GetInstance()->IsKeyDown(VK_LEFT))
-		{
-			float yaw = (float)m_dSpeed * (float)dt;
-			Mtx44 rotation;
-			rotation.SetToRotation(yaw, 0, 1, 0);
-			viewUV = rotation * viewUV;
-			target = position + viewUV;
-			rightUV = viewUV.Cross(up);
-			rightUV.y = 0;
-			rightUV.Normalize();
-			up = rightUV.Cross(viewUV).Normalized();
-		}
-		else if (KeyboardController::GetInstance()->IsKeyDown(VK_RIGHT))
-		{
-			float yaw = (float)(-m_dSpeed * (float)dt);
-			Mtx44 rotation;
-			rotation.SetToRotation(yaw, 0, 1, 0);
-			viewUV = rotation * viewUV;
-			target = position + viewUV;
-			rightUV = viewUV.Cross(up);
-			rightUV.y = 0;
-			rightUV.Normalize();
-			up = rightUV.Cross(viewUV).Normalized();
-		}
-		if (KeyboardController::GetInstance()->IsKeyDown(VK_UP))
-		{
-			float pitch = (float)(m_dSpeed * (float)dt);
-			rightUV = viewUV.Cross(up);
-			rightUV.y = 0;
-			rightUV.Normalize();
-			up = rightUV.Cross(viewUV).Normalized();
-			Mtx44 rotation;
-			rotation.SetToRotation(pitch, rightUV.x, rightUV.y, rightUV.z);
-			viewUV = rotation * viewUV;
-			target = position + viewUV;
-		}
-		else if (KeyboardController::GetInstance()->IsKeyDown(VK_DOWN))
-		{
-			float pitch = (float)(-m_dSpeed * (float)dt);
-			rightUV = viewUV.Cross(up);
-			rightUV.y = 0;
-			rightUV.Normalize();
-			up = rightUV.Cross(viewUV).Normalized();
-			Mtx44 rotation;
-			rotation.SetToRotation(pitch, rightUV.x, rightUV.y, rightUV.z);
-			viewUV = rotation * viewUV;
-			target = position + viewUV;
-		}
-	}
-
 	//Update the camera direction based on mouse move
 	{
 		Vector3 viewUV = (target - position).Normalized();
 		Vector3 rightUV;
 
 		{
-			float yaw = (float)(-m_dSpeed * camera_yaw * (float)dt);
+			float yaw = (float)(-m_dMouseSensitivity * camera_yaw * (float)dt);
 			Mtx44 rotation;
 			rotation.SetToRotation(yaw, 0, 1, 0);
 			viewUV = rotation * viewUV;
@@ -407,7 +350,7 @@ void CPlayerInfo::Update(double dt)
 			up = rightUV.Cross(viewUV).Normalized();
 		}
 		{
-			float pitch = (float)(-m_dSpeed * camera_pitch * (float)dt);
+			float pitch = (float)(-m_dMouseSensitivity * camera_pitch * (float)dt);
 			rightUV = viewUV.Cross(up);
 			rightUV.y = 0;
 			rightUV.Normalize();

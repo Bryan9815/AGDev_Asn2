@@ -1,7 +1,7 @@
 #include <iostream>
 using namespace std;
 
-#include "introstate.h"
+#include "MenuState.h"
 #include "GL\glew.h"
 #include "../Application.h"
 #include "LoadTGA.h"
