@@ -24,6 +24,7 @@
 #include "SpatialPartition\SpatialPartition.h"
 #include "Waypoint\WaypointManager.h"
 #include "Lua/LuaInterface.h"
+#include "AudioManager.h"
 #include <iostream>
 using namespace std;
 
@@ -81,6 +82,9 @@ void SceneText::Init()
 	camera.Init(playerInfo->GetPos(), playerInfo->GetTarget(), playerInfo->GetUp());
 	playerInfo->AttachCamera(&camera);
 	GraphicsManager::GetInstance()->AttachCamera(&camera);
+
+	// Audio
+	AudioManager::GetInstance().PlayAudio2D("Audio/Viper_Orchestral.ogg", true, CLuaInterface::GetInstance()->getFloatValue("Music"));
 
 	// Load all the meshes
 	MeshBuilder::GetInstance()->GenerateAxes("reference");

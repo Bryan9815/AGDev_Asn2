@@ -45,8 +45,8 @@ void AudioSettings::Init()
 
 	CLuaInterface::GetInstance()->Init("LuaScript/Gameplay.lua");
 
-	SFX = CLuaInterface::GetInstance()->getIntValue("SFX");
-	Music = CLuaInterface::GetInstance()->getIntValue("Music");
+	SFX = CLuaInterface::GetInstance()->getFloatValue("SFX") * 100;
+	Music = CLuaInterface::GetInstance()->getFloatValue("Music") * 100;
 
 	SFX_text = to_string(SFX);
 	Music_text = to_string(Music);
@@ -196,8 +196,8 @@ void AudioSettings::Exit()
 {
 	sceneActive = false;
 
-	CLuaInterface::GetInstance()->saveIntValue("LuaScript/Gameplay.lua", "SFX", SFX);
-	CLuaInterface::GetInstance()->saveIntValue("LuaScript/Gameplay.lua", "Music", Music);
+	CLuaInterface::GetInstance()->saveFloatValue("LuaScript/Gameplay.lua", "SFX", SFX * 0.01);
+	CLuaInterface::GetInstance()->saveFloatValue("LuaScript/Gameplay.lua", "Music", Music * 0.01);
 
 	// Remove the entity from EntityManager
 	EntityManager::GetInstance()->RemoveEntity(AudioBackground);

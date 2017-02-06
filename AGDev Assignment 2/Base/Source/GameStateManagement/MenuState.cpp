@@ -71,7 +71,7 @@ void CMenuState::Update(double dt)
 		if (MenuOption > 0)
 			MenuOption--;
 	if (KeyboardController::GetInstance()->IsKeyReleased('S'))
-		if (MenuOption < 2)
+		if (MenuOption < 1)
 			MenuOption++;
 
 	if (KeyboardController::GetInstance()->IsKeyReleased(VK_SPACE))
@@ -80,8 +80,8 @@ void CMenuState::Update(double dt)
 			SceneManager::GetInstance()->SetActiveScene("GameState");
 		else if (MenuOption == 1)
 			SceneManager::GetInstance()->SetActiveScene("Options");
-		else if (MenuOption == 2)
-			SceneManager::GetInstance()->SetActiveScene("Score");
+		//else if (MenuOption == 2)
+		//	SceneManager::GetInstance()->SetActiveScene("Score");
 	}
 }
 void CMenuState::Render()
@@ -105,7 +105,7 @@ void CMenuState::Render()
 	// Render the required entities
 	EntityManager::GetInstance()->RenderUI();
 
-	for (int i = 0; i < 3; i++)
+	for (int i = 0; i < 2; i++)
 	{
 		modelStack.PushMatrix();
 		modelStack.Translate(halfWindowWidth, (halfWindowHeight * 0.8 - (halfWindowHeight * 0.25 * i)), 1.f);
@@ -135,11 +135,11 @@ void CMenuState::Render()
 	RenderHelper::RenderText(MeshBuilder::GetInstance()->GetMesh("Text"), "Options", (1.f, 1.f, 1.f));
 	modelStack.PopMatrix();
 
-	modelStack.PushMatrix();
-	modelStack.Translate(halfWindowWidth * 0.95, (halfWindowHeight * 0.8 - (halfWindowHeight * 0.25 * 2)), 2.f);
-	modelStack.Scale(halfWindowWidth * 0.03333, halfWindowHeight * 0.133333, 1.f);
-	RenderHelper::RenderText(MeshBuilder::GetInstance()->GetMesh("Text"), "Score", (1.f, 1.f, 1.f));
-	modelStack.PopMatrix();
+	//modelStack.PushMatrix();
+	//modelStack.Translate(halfWindowWidth * 0.95, (halfWindowHeight * 0.8 - (halfWindowHeight * 0.25 * 2)), 2.f);
+	//modelStack.Scale(halfWindowWidth * 0.03333, halfWindowHeight * 0.133333, 1.f);
+	//RenderHelper::RenderText(MeshBuilder::GetInstance()->GetMesh("Text"), "Score", (1.f, 1.f, 1.f));
+	//modelStack.PopMatrix();
 }
 void CMenuState::Exit()
 {

@@ -9,6 +9,7 @@
 #include "../WeaponInfo/LaserBlaster.h"
 #include "../WeaponInfo/GrenadeThrow.h"
 #include "../Lua/LuaInterface.h"
+#include "../AudioManager.h"
 
 // Allocating and initializing CPlayerInfo's static data member.  
 // The pointer is allocated but not the object's constructor.
@@ -393,6 +394,8 @@ void CPlayerInfo::Update(double dt)
 	{
 		if (primaryWeapon)
 			primaryWeapon->Discharge(position, target, this);
+		if (primaryWeapon->GetMagRound() > 0)
+			AudioManager::GetInstance().PlayAudio2D("Audio/Gun.flac", false, CLuaInterface::GetInstance()->getFloatValue("SFX"));
 	}
 	else if (MouseController::GetInstance()->IsButtonPressed(MouseController::RMB))
 	{
