@@ -3,6 +3,10 @@
 #include "GraphicsManager.h"
 #include "RenderHelper.h"
 #include "../Waypoint/WaypointManager.h"
+#include "../PlayerInfo/PlayerInfo.h"
+
+const int Patrol = 0;
+const int Chase = 1;
 
 CEnemy::CEnemy()
 	: GenericEntity(NULL)
@@ -35,8 +39,9 @@ void CEnemy::Init(void)
 	listOfWaypoints.push_back(0);
 	listOfWaypoints.push_back(1);
 	listOfWaypoints.push_back(2);
+	listOfWaypoints.push_back(3);
 
-	m_iWayPointIndex = 0;
+	m_iWayPointIndex = -1;
 
 	// Set the current values
 	position.Set(10.0f, 0.0f, 0.0f);
@@ -46,7 +51,7 @@ void CEnemy::Init(void)
 		target = nextWaypoint->GetPosition();
 	else
 		target = Vector3(0, 0, 0);
-	cout << "Next target: " << target << endl;
+	cout << "Next target: " << target << " ID: " << nextWaypoint->GetID() << endl;
 	up.Set(0.0f, 1.0f, 0.0f);
 
 	// Set Boundary
@@ -66,6 +71,7 @@ void CEnemy::Init(void)
 	// Add to EntityManager
 	EntityManager::GetInstance()->AddEntity(this, true);
 
+	state = 0;
 }
 
 // Reset this player instance to default
@@ -135,7 +141,7 @@ GroundEntity* CEnemy::GetTerrain(void)
 // Get next Waypoint for this CEnemy
 CWaypoint* CEnemy::GetNextWaypoint(void)
 {
-	if ((int)listOfWaypoints.size() > 0)
+	if ((int)listOfWaypoints.size() > -1)
 	{
 		m_iWayPointIndex++;
 		if (m_iWayPointIndex >= (int)listOfWaypoints.size())
@@ -151,27 +157,37 @@ void CEnemy::Update(double dt)
 {
 	Vector3 viewVector = (target - position).Normalized();
 	position += viewVector * (float)m_dSpeed * (float)dt;
-	//cout << position << "..." << viewVector << endl;
+
+	distFromPlayer = (position - CPlayerInfo::GetInstance()->GetPos()).Length();
 
 	// Constrain the position
 	Constrain();
 
 	// Update the target
-	/*
-	if (position.z > 400.0f)
-	target.z = position.z * -1;
-	else if (position.z < -400.0f)
-	target.z = position.z * -1;
-	*/
-
-	if ((target - position).LengthSquared() < 25.0f)
+	switch (state)
 	{
-		CWaypoint* nextWaypoint = GetNextWaypoint();
-		if (nextWaypoint)
-			target = nextWaypoint->GetPosition();
-		else
-			target = Vector3(0, 0, 0);
+	case Patrol:
+		if ((target - position).LengthSquared() < 25.0f)
+		{
+			CWaypoint* nextWaypoint = GetNextWaypoint();
+			if (nextWaypoint)
+				target = nextWaypoint->GetPosition();
+			else
+				target = Vector3(0, 0, 0);
+			cout << "Next target: " << target << " ID: " << nextWaypoint->GetID() << endl;
+		}
+		break;
+	case Chase:
+		target = CPlayerInfo::GetInstance()->GetPos();
 		cout << "Next target: " << target << endl;
+		break;
+	}
+
+	if (distFromPlayer < (scale.x + 15.f))
+		state = Chase;
+	else
+	{
+		state = Patrol;
 	}
 }
 

@@ -220,7 +220,7 @@ void GameplaySettings::Render()
 		modelStack.PopMatrix();
 
 		modelStack.PushMatrix();
-		modelStack.Translate(halfWindowWidth * 0.95, halfWindowHeight * 1.05 - (halfWindowHeight * 0.25 * 3), 5.f);
+		modelStack.Translate(halfWindowWidth * 0.925, halfWindowHeight * 1.05 - (halfWindowHeight * 0.25 * 3), 5.f);
 		modelStack.Scale(halfWindowWidth * 0.03333, halfWindowHeight * 0.133333, 1.f);
 		RenderHelper::RenderText(MeshBuilder::GetInstance()->GetMesh("Text"), "Exit", (1.f, 1.f, 1.f));
 		modelStack.PopMatrix();

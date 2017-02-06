@@ -62,10 +62,9 @@ Skybox_top = "skybox_top.tga"
 Skybox_bottom = "skybox_bottom.tga"
 NumberOfWaypoints = 4;
 Waypoint1 = {50, 0, -50}
-Waypoint2 = {10, 0, 50}
-Waypoint3 = {50, 0, 50}
-Waypoint4 = {10, 0, -50}
- 
+Waypoint2 = {10, 0, -50}
+Waypoint3 = {10, 0, 50}
+Waypoint4 = {50, 0, 50}
  -- Keyboard Inputs
 moveForward  = "W"
 moveBackward = "S"
@@ -161,4 +160,11 @@ MouseSensitivity = 7
 MouseSensitivity = 7
 MouseSensitivity = 7
 MouseSensitivity = 1
+MouseSensitivity = 7
+MouseSensitivity = 7
+SFX = 89
+Music = 70
+MouseSensitivity = 7
+SFX = 89
+Music = 70
 MouseSensitivity = 7

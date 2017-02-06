@@ -122,19 +122,19 @@ void Options::Render()
 
 	// Text
 	modelStack.PushMatrix();
-	modelStack.Translate(halfWindowWidth * 0.95, (halfWindowHeight * 1.5), 2.f);
+	modelStack.Translate(halfWindowWidth * 0.925, (halfWindowHeight * 1.5), 2.f);
 	modelStack.Scale(halfWindowWidth * 0.03333, halfWindowHeight * 0.133333, 1.f);
 	RenderHelper::RenderText(MeshBuilder::GetInstance()->GetMesh("Text"), "Audio", (1.f, 1.f, 1.f));
 	modelStack.PopMatrix();
 
 	modelStack.PushMatrix();
-	modelStack.Translate(halfWindowWidth * 0.95, halfWindowHeight * 1.5 - (halfWindowHeight * 0.25), 2.f);
+	modelStack.Translate(halfWindowWidth * 0.875, halfWindowHeight * 1.5 - (halfWindowHeight * 0.25), 2.f);
 	modelStack.Scale(halfWindowWidth * 0.03333, halfWindowHeight * 0.133333, 1.f);
-	RenderHelper::RenderText(MeshBuilder::GetInstance()->GetMesh("Text"), "Controls", (1.f, 1.f, 1.f));
+	RenderHelper::RenderText(MeshBuilder::GetInstance()->GetMesh("Text"), "Gameplay", (1.f, 1.f, 1.f));
 	modelStack.PopMatrix();
 
 	modelStack.PushMatrix();
-	modelStack.Translate(halfWindowWidth * 0.95, (halfWindowHeight - (halfWindowHeight * 0.75)), 2.f);
+	modelStack.Translate(halfWindowWidth * 0.925, (halfWindowHeight - (halfWindowHeight * 0.75)), 2.f);
 	modelStack.Scale(halfWindowWidth * 0.03333, halfWindowHeight * 0.133333, 1.f);
 	RenderHelper::RenderText(MeshBuilder::GetInstance()->GetMesh("Text"), "Exit", (1.f, 1.f, 1.f));
 	modelStack.PopMatrix();

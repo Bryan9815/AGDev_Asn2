@@ -25,6 +25,9 @@ protected:
 	double m_dSpeed;
 	double m_dAcceleration;
 
+	int state;
+	float distFromPlayer;
+	//CWaypoint* nextWaypoint;
 public:
 	CEnemy(void);
 	virtual ~CEnemy();

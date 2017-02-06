@@ -168,7 +168,7 @@ void SceneText::Init()
 	//grandchildNode->SetUpdateTransformation(aRotateMtx);
 	
 	// Create a Waypoint inside WaypointManager
-	for (int i = 0; i < CLuaInterface::GetInstance()->getIntValue("NumberOfWaypoints"); i++)
+	/*for (int i = 0; i < CLuaInterface::GetInstance()->getIntValue("NumberOfWaypoints"); i++)
 	{
 		switch (i)
 		{
@@ -186,7 +186,12 @@ void SceneText::Init()
 			break;
 		}
 		CWaypointManager::GetInstance()->PrintSelf();
-	}
+	}*/
+	int Waypoint1 = CWaypointManager::GetInstance()->AddWaypoint(CLuaInterface::GetInstance()->getVector3Values("Waypoint1"));
+	int Waypoint2 = CWaypointManager::GetInstance()->AddWaypoint(Waypoint1, CLuaInterface::GetInstance()->getVector3Values("Waypoint2"));
+	int Waypoint3 = CWaypointManager::GetInstance()->AddWaypoint(Waypoint2, CLuaInterface::GetInstance()->getVector3Values("Waypoint3"));
+	int Waypoint4 = CWaypointManager::GetInstance()->AddWaypoint(Waypoint3, CLuaInterface::GetInstance()->getVector3Values("Waypoint4"));
+	//CWaypointManager::GetInstance()->AddWaypoint(Waypoint4, CLuaInterface::GetInstance()->getVector3Values("Waypoint3"));
 	// Create a CEnemy instance
 	theEnemy = new CEnemy();
 	theEnemy->Init();
