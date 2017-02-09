@@ -73,6 +73,10 @@ void CPlayerInfo::Init(void)
 	// Set the pistol as the primary weapon
 	primaryWeapon = new CPistol();
 	primaryWeapon->Init();
+	primaryWeapon->SetMaxMagRound(CLuaInterface::GetInstance()->getIntValue("Max_Magazine"));
+	primaryWeapon->SetMagRound(CLuaInterface::GetInstance()->getIntValue("Current_Magazine"));
+	primaryWeapon->SetMaxTotalRound(CLuaInterface::GetInstance()->getIntValue("Total_Rounds"));
+	primaryWeapon->SetTotalRound(CLuaInterface::GetInstance()->getIntValue("Current_Total_Rounds"));
 	// Set the laser blaster as the secondary weapon
 	//secondaryWeapon = new CLaserBlaster();
 	//secondaryWeapon->Init();

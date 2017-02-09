@@ -50,21 +50,19 @@ end
 CPlayerInfoStartPos = {0,0,10}
 MouseSensitivity = 5;
 playerSpeed = 40;
+Max_Magazine = 16;
+Current_Magazine = 16;
+Total_Rounds = 112;
+Current_Total_Rounds = 112;
 
 -- Scene variables
 GroundPos = {0, -10, 0}
 GroundScale = {100, 100, 100}
-Skybox_front = "skybox_front.tga"
-Skybox_back = "skybox_back.tga"
-Skybox_left = "skybox_left.tga"
-Skybox_right = "skybox_right.tga"
-Skybox_top = "skybox_top.tga"
-Skybox_bottom = "skybox_bottom.tga"
 NumberOfWaypoints = 4;
-Waypoint1 = {50, 0, -50}
-Waypoint2 = {10, 0, -50}
-Waypoint3 = {10, 0, 50}
-Waypoint4 = {50, 0, 50}
+Waypoint1 = {80, 0, -50}
+Waypoint2 = {-80, 0, -50}
+Waypoint3 = {-80, 0, 50}
+Waypoint4 = {80, 0, 50}
  -- Keyboard Inputs
 moveForward  = "W"
 moveBackward = "S"
@@ -200,5 +198,10 @@ SFX = 0.2200
 Music = 0.4100
 SFX = 0.5200
 Music = 0.7500
+SFX = 0.5200
+Music = 0.2900
+SFX = 0.5200
+Music = 0.2900
+MouseSensitivity = 7
 SFX = 0.5200
 Music = 0.2900

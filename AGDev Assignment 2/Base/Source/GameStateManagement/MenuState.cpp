@@ -40,7 +40,7 @@ void CMenuState::Init()
 	MenuStateBackground = Create::Sprite2DObject("MENUSTATE_BKGROUND", Vector3(halfWindowWidth, halfWindowHeight, 0.0f), Vector3(Application::GetInstance().GetWindowWidth(), Application::GetInstance().GetWindowHeight(), 0.0f));
 
 	MeshBuilder::GetInstance()->GenerateText("Text", 16, 16);
-	MeshBuilder::GetInstance()->GetMesh("Text")->textureID = LoadTGA("Image//calibri.tga");
+	MeshBuilder::GetInstance()->GetMesh("Text")->textureID = LoadTGA("Image//ExportedFont.tga");
 
 	MeshBuilder::GetInstance()->GenerateQuad("Button", Color(1, 1, 1), 1.f);
 	MeshBuilder::GetInstance()->GetMesh("Button")->textureID = LoadTGA("Image/UI/RoundedButton.tga");
@@ -60,13 +60,6 @@ void CMenuState::Init()
 }
 void CMenuState::Update(double dt)
 {
-	//if (KeyboardController::GetInstance()->IsKeyReleased(VK_SPACE))
-	//	SceneManager::GetInstance()->SetActiveScene("GameState");
-	//if (KeyboardController::GetInstance()->IsKeyReleased('O'))
-	//	SceneManager::GetInstance()->SetActiveScene("Options");
-	//if (KeyboardController::GetInstance()->IsKeyReleased('S'))
-	//	SceneManager::GetInstance()->SetActiveScene("Score");
-
 	if (KeyboardController::GetInstance()->IsKeyReleased('W'))
 		if (MenuOption > 0)
 			MenuOption--;
@@ -80,8 +73,6 @@ void CMenuState::Update(double dt)
 			SceneManager::GetInstance()->SetActiveScene("GameState");
 		else if (MenuOption == 1)
 			SceneManager::GetInstance()->SetActiveScene("Options");
-		//else if (MenuOption == 2)
-		//	SceneManager::GetInstance()->SetActiveScene("Score");
 	}
 }
 void CMenuState::Render()
@@ -134,12 +125,6 @@ void CMenuState::Render()
 	modelStack.Scale(halfWindowWidth * 0.03333, halfWindowHeight * 0.133333, 1.f);
 	RenderHelper::RenderText(MeshBuilder::GetInstance()->GetMesh("Text"), "Options", (1.f, 1.f, 1.f));
 	modelStack.PopMatrix();
-
-	//modelStack.PushMatrix();
-	//modelStack.Translate(halfWindowWidth * 0.95, (halfWindowHeight * 0.8 - (halfWindowHeight * 0.25 * 2)), 2.f);
-	//modelStack.Scale(halfWindowWidth * 0.03333, halfWindowHeight * 0.133333, 1.f);
-	//RenderHelper::RenderText(MeshBuilder::GetInstance()->GetMesh("Text"), "Score", (1.f, 1.f, 1.f));
-	//modelStack.PopMatrix();
 }
 void CMenuState::Exit()
 {

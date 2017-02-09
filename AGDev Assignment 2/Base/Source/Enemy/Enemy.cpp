@@ -44,7 +44,7 @@ void CEnemy::Init(void)
 	m_iWayPointIndex = -1;
 
 	// Set the current values
-	position.Set(10.0f, 0.0f, 0.0f);
+	position.Set(80.0f, 0.0f, 0.0f);
 	//target.Set(10.0f, 0.0f, 450.0f);
 	CWaypoint* nextWaypoint = GetNextWaypoint();
 	if (nextWaypoint)

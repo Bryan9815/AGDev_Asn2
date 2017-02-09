@@ -28,7 +28,6 @@ Options::~Options()
 
 void Options::Init()
 {
-	//CLuaInterface::GetInstance()->Init("LuaScript/DM2240.lua");
 	// Create and attach the camera to the scene
 	camera.Init(Vector3(0, 0, 10), Vector3(0, 0, 0), Vector3(0, 1, 0));
 	GraphicsManager::GetInstance()->AttachCamera(&camera);

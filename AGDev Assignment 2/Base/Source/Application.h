@@ -8,7 +8,6 @@
 #include "GameStateManagement\Options.h"
 #include "GameStateManagement\AudioSettings.h"
 #include "GameStateManagement\GameplaySettings.h"
-#include "GameStateManagement\Score.h"
 
 class ShaderProgram;
 struct GLFWwindow;

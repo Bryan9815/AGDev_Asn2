@@ -138,9 +138,6 @@
     <ClCompile Include="Source\GameStateManagement\Options.cpp">
       <Filter>Game States</Filter>
     </ClCompile>
-    <ClCompile Include="Source\GameStateManagement\Score.cpp">
-      <Filter>Game States</Filter>
-    </ClCompile>
     <ClCompile Include="Source\GameStateManagement\AudioSettings.cpp">
       <Filter>Game States</Filter>
     </ClCompile>
@@ -264,9 +261,6 @@
       <Filter>Lua</Filter>
     </ClInclude>
     <ClInclude Include="Source\GameStateManagement\Options.h">
-      <Filter>Game States</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\GameStateManagement\Score.h">
       <Filter>Game States</Filter>
     </ClInclude>
     <ClInclude Include="Source\GameStateManagement\AudioSettings.h">

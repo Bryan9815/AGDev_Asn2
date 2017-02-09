@@ -222,7 +222,6 @@ void Application::Init()
 	SceneManager::GetInstance()->AddScene("Options", new Options());
 	SceneManager::GetInstance()->AddScene("AudioSettings", new AudioSettings());
 	SceneManager::GetInstance()->AddScene("GameplaySettings", new GameplaySettings());
-	SceneManager::GetInstance()->AddScene("Score", new Score());
 	SceneManager::GetInstance()->AddScene("GameState", new SceneText());
 
 	// Set the active scene
