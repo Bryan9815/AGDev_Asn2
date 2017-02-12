@@ -90,7 +90,6 @@ void SceneText::Init()
 	MeshBuilder::GetInstance()->GenerateAxes("reference");
 	MeshBuilder::GetInstance()->GenerateCrossHair("crosshair");
 	MeshBuilder::GetInstance()->GenerateQuad("quad", Color(1, 1, 1), 1.f);
-	MeshBuilder::GetInstance()->GetMesh("quad")->textureID = LoadTGA("Image//calibri.tga");
 	MeshBuilder::GetInstance()->GenerateRing("ring", Color(1, 0, 1), 36, 1, 0.5f);
 	MeshBuilder::GetInstance()->GenerateSphere("lightball", Color(1, 1, 1), 18, 36, 1.f);
 	MeshBuilder::GetInstance()->GenerateSphere("sphere", Color(1, 0, 0), 18, 36, 0.5f);
@@ -130,72 +129,22 @@ void SceneText::Init()
 	Create::Entity("reference", Vector3(0.0f, 0.0f, 0.0f)); // Reference
 	Create::Entity("lightball", Vector3(lights[0]->position.x, lights[0]->position.y, lights[0]->position.z)); // Lightball
 
-	//GenericEntity* aCube = Create::Entity("cube", Vector3(-20.0f, 0.0f, -20.0f));
-	//aCube->SetCollider(true);
-	//aCube->SetAABB(Vector3(0.5f, 0.5f, 0.5f), Vector3(-0.5f, -0.5f, -0.5f));
-	//aCube->InitLOD("cube", "sphere", "cubeSG");
-
-	// Add the pointer to this new entity to the Scene Graph
-	//CSceneNode* theNode = CSceneGraph::GetInstance()->AddNode(aCube);
-	//if (theNode == NULL)
-	//{
-	//	cout << "EntityManager::AddEntity: Unable to add to scene graph!" << endl;
-	//}
-
-	//GenericEntity* anotherCube = Create::Entity("cube", Vector3(-20.0f, 1.1f, -20.0f));
-	//anotherCube->SetCollider(true);
-	//anotherCube->SetAABB(Vector3(0.5f, 0.5f, 0.5f), Vector3(-0.5f, -0.5f, -0.5f));
-	//CSceneNode* anotherNode = theNode->AddChild(anotherCube);
-	//if (anotherNode == NULL)
-	//{
-	//	cout << "EntityManager::AddEntity: Unable to add to scene graph!" << endl;
-	//}
-	//
-	//GenericEntity* baseCube = Create::Asset("cube", Vector3(0.0f, 0.0f, 0.0f));
-	//CSceneNode* baseNode = CSceneGraph::GetInstance()->AddNode(baseCube);
-
-	//CUpdateTransformation* baseMtx = new CUpdateTransformation();
-	//baseMtx->ApplyUpdate(1.0f, 0.0f, 0.0f, 1.0f);
-	//baseMtx->SetSteps(-60, 60);
-	//baseNode->SetUpdateTransformation(baseMtx);
-
-	//GenericEntity* childCube = Create::Asset("cubeSG", Vector3(0.0f, 0.0f, 0.0f));
-	//CSceneNode* childNode = baseNode->AddChild(childCube);
-	//childNode->ApplyTranslate(0.0f, 1.0f, 0.0f);
-
-	//GenericEntity* grandchildCube = Create::Asset("cubeSG", Vector3(0.0f, 0.0f, 0.0f));
-	//CSceneNode* grandchildNode = childNode->AddChild(grandchildCube);
-	//grandchildNode->ApplyTranslate(0.0f, 0.0f, 1.0f);
-	//CUpdateTransformation* aRotateMtx = new CUpdateTransformation();
-	//aRotateMtx->ApplyUpdate(1.0f, 0.0f, 0.0f, 1.0f);
-	//aRotateMtx->SetSteps(-120, 60);
-	//grandchildNode->SetUpdateTransformation(aRotateMtx);
-	
-	// Create a Waypoint inside WaypointManager
-	/*for (int i = 0; i < CLuaInterface::GetInstance()->getIntValue("NumberOfWaypoints"); i++)
-	{
-		switch (i)
-		{
-		case 0:
-			i = CWaypointManager::GetInstance()->AddWaypoint(CLuaInterface::GetInstance()->getVector3Values("Waypoint1"));
-			break;
-		case 1:
-			i = CWaypointManager::GetInstance()->AddWaypoint(i-1, CLuaInterface::GetInstance()->getVector3Values("Waypoint2"));
-			break;
-		case 2:
-			i = CWaypointManager::GetInstance()->AddWaypoint(i-1, CLuaInterface::GetInstance()->getVector3Values("Waypoint3"));
-			break;
-		case 3:
-			i = CWaypointManager::GetInstance()->AddWaypoint(i-1, CLuaInterface::GetInstance()->getVector3Values("Waypoint4"));
-			break;
-		}
-		CWaypointManager::GetInstance()->PrintSelf();
-	}*/
+	// Waypoints
 	int Waypoint1 = CWaypointManager::GetInstance()->AddWaypoint(CLuaInterface::GetInstance()->getVector3Values("Waypoint1"));
 	int Waypoint2 = CWaypointManager::GetInstance()->AddWaypoint(Waypoint1, CLuaInterface::GetInstance()->getVector3Values("Waypoint2"));
 	int Waypoint3 = CWaypointManager::GetInstance()->AddWaypoint(Waypoint2, CLuaInterface::GetInstance()->getVector3Values("Waypoint3"));
 	int Waypoint4 = CWaypointManager::GetInstance()->AddWaypoint(Waypoint3, CLuaInterface::GetInstance()->getVector3Values("Waypoint4"));
 	//CWaypointManager::GetInstance()->AddWaypoint(Waypoint4, CLuaInterface::GetInstance()->getVector3Values("Waypoint3"));
+
+	lua_State* L = luaL_newstate();
+	L = lua_open();
+	luaL_openlibs(L);
+	lua_register(L, "PrintWaypoint", &luaPrintWaypoint);
+	cout << "--------List of Waypoints--------" << endl;
+	luaL_dofile(L, "LuaScript/LuaCFunction.lua");
+	cout << "---------------------------------" << endl;
+	lua_close(L);
+
 	// Create a CEnemy instance
 	theEnemy = new CEnemy();
 	theEnemy->Init();

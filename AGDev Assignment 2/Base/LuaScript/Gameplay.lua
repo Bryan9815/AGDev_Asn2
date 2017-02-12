@@ -63,6 +63,7 @@ Waypoint1 = {80, 0, -50}
 Waypoint2 = {-80, 0, -50}
 Waypoint3 = {-80, 0, 50}
 Waypoint4 = {80, 0, 50}
+
  -- Keyboard Inputs
 moveForward  = "W"
 moveBackward = "S"

@@ -29,7 +29,7 @@ CEnemy::~CEnemy()
 }
 
 void CEnemy::Init(void)
-{
+{	
 	// Set the default values
 	defaultPosition.Set(0, 0, 10);
 	defaultTarget.Set(0, 0, 0);
